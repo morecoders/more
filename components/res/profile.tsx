@@ -1,9 +1,7 @@
 'use client'
 
-import Image from 'next/image'
-import { useRouter } from 'next/navigation'
-import { useEffect } from 'react'
-
+import Recommend from '../ui/recommend'
+import ProfileHeader from "./profile-header"
 
 
 
@@ -19,12 +17,6 @@ const Profile = (
   }
 ) => {
   
-  let profile =  '/profile.svg'
-  const route = useRouter()
-
-  useEffect(()=> {
-    route.refresh()
-  }, [username])
   return (
 
    
@@ -32,27 +24,21 @@ const Profile = (
       
         <div className="max-w-5xl mx-auto">
           {/* Header */}
-          <div className="mb-8">
-            <h1 className="text-3xl font-bold text-gray-800">Welcome back, {first_name} 👋</h1>
-            <p className="text-gray-600 mt-1">Here’s your profile and tools to manage your portfolio.</p>
-          </div>
 
+          <ProfileHeader name= {first_name} />
+          
           {/* Profile Card */}
-          <section className="bg-blue-50 rounded-xl shadow-md p-6 mb-8 flex flex-col sm:flex-row items-center sm:items-start gap-6">
-            {/* Profile Image */}
-            <div className="flex items-center justify-center w-22 h-22 rounded-full overflow-hidden border-1 border-blue-500 shadow">
-              <Image className='rounded-full' src={img ?? profile} alt={`${first_name}`} width={100} height={100}/>
-            </div>
-
+          <section className="bg-blue-50 rounded-xl shadow-md mt-3 p-6 mb-8 flex flex-col sm:flex-row items-center sm:items-start gap-6">
+            
             {/* Info */}
             <div className="w-full">
               <h2 className="text-xl font-semibold text-gray-800 mb-4">Your Profile</h2>
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 text-sm">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 text-sm mt-4">
                 <div>
                   <span className="text-gray-500">First Name</span>
-                  <p className="font-medium text-gray-800">{first_name}</p>
+                  <p className="font-medium text-gray-800 mb-2">{first_name}</p>
                   <span className="text-gray-500">Last Name</span>
-                  <p className="font-medium text-gray-800">{last_name}</p>
+                  <p className="font-medium text-gray-800 mb-2">{last_name}</p>
                 </div>
                 <div>
                   <span className="text-gray-500">Username</span>
@@ -60,14 +46,15 @@ const Profile = (
                 </div>
                 <div>
                   <span className="text-gray-500">Occupation</span>
-                  <p className="font-medium text-gray-800">ToDo</p>
+                  <p className="font-medium text-gray-800">{job ?? "ToDo"}</p>
                 </div>
                 <div>
                   <span className="text-gray-500">Age</span>
-                  <p className="font-medium text-gray-800">ToDo</p>
+                  <p className="font-medium text-gray-800">{age ?? "ToDo"}</p>
                 </div>
               </div>
             </div>
+            <Recommend />
           </section>
 
           {/* Quick Actions */}

@@ -1,18 +1,19 @@
 'use client'
 
-import { AddUser } from '@/actions/create'
 import Head from 'next/head'
-import { useActionState } from 'react'
 import Click from '../ui/link'
-import { redirect } from 'next/navigation'
+import { useActionState } from 'react'
+import { onSubmitSignUp } from '@/utils/signup'
 
 
-const Signup = ({click}: {click: Function})=> {
-  const initialState = { success: false, error: null, fieldErrors: {} }
-  const [st, dispatch, isPending] = useActionState(AddUser, initialState)
+const initialState = {
+  success: false,
+  error: ""
+}
+const Signup = ()=> {
   
-  if(st.success) redirect('/dashboard/profile')
-    
+  const [_, dispatch, isPending] = useActionState(onSubmitSignUp, initialState)
+
   return (
     <>
       <Head>
@@ -48,12 +49,12 @@ const Signup = ({click}: {click: Function})=> {
               />
             </div>
 
-            {/* Username */}
+            {/* Email */}
             <div>
-              <label className="block text-sm font-medium text-gray-700">Username</label>
+              <label className="block text-sm font-medium text-gray-700">Email</label>
               <input
                 type="email"
-                name="username"
+                name="email" // <-- FIXED: was "username"
                 className="mt-1 w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-2 focus:ring-blue-500 focus:outline-none"
                 placeholder="doe@aol.com"
                 required
@@ -100,13 +101,13 @@ const Signup = ({click}: {click: Function})=> {
               type="submit"
               className="w-full bg-blue-600 text-white py-2 rounded-md hover:bg-blue-700 transition duration-200 font-medium"
               disabled={isPending}
-            >
+              >
               Sign Up
             </button>
           </form>
 
           <div className="mt-4 text-sm text-center text-gray-500" >
-            Already have an account? <Click text='Log In' click={click} />
+            Already have an account? <Click text='Log In' route='v1/signin' />
           </div>
         </div>
       </main> 

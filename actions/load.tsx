@@ -1,10 +1,7 @@
 'use server'
 
-import { get_user } from "@/db/user"
-import { prisma } from "@/prisma/helper"
 import { LoggedInUser, LoginUser, LoginUserState, RegisterUser, loginSchema, schema } from "@/types/types"
 import { set_cookies } from "@/utils/cookies"
-import axios from "axios"
 import { revalidatePath } from "next/cache"
 import { cookies } from "next/headers"
 
@@ -27,12 +24,13 @@ export async function LoginUserFn(_: LoginUserState, formData: FormData): Promis
     const email = data.username
     const password = data.password
  
-    const model = await get_user({email, password})
-    
+    const response = await axios.post(`${url}/login`, { email, password });
+    const model = response.data;
+
     if (!model) {
       return { user: null, error: 'Failed to fetch user', success: false }
     }
-    
+
     const loggedInUser: LoggedInUser = {
       firstName: model.firstName,
       lastName: model.lastName,

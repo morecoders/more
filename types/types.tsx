@@ -1,16 +1,20 @@
-
-import {z} from 'zod'
-
-
 //user register schema
+import { z } from "zod";
+
 export const schema = z.object({
   firstName: z.string().min(3, 'First name is required'),
   lastName: z.string().min(3, 'Last name is required'),
-  username: z.email(),
-  password: z.string().min(8, 'Password must be at least 6 characters').max(18).regex(/[A-Z]/).regex(/[0-9]/),
+  email: z.email(),
+  password: z
+    .string()
+    .min(8, 'Password must be at least 8 characters')
+    .max(18)
+    .regex(/[A-Z]/, 'Password must contain at least one uppercase letter')
+    .regex(/[0-9]/, 'Password must contain at least one number'),
   occupation: z.string(),
-  age: z.string(),
-})
+  age: z.coerce.number(),
+});
+
 
 export type LoggedInUser = {
   firstName: string,
@@ -22,8 +26,8 @@ export type LoggedInUser = {
 
 
 export const loginSchema = z.object({
-  username: z.email(),
-  password: z.string().min(8, 'Password must be at least 6 characters').max(18).regex(/[A-Z]/).regex(/[0-9]/),
+  email: z.email(),
+  password: z.string().min(8, 'Password must be at least 8 characters').max(18).regex(/[A-Z]/).regex(/[0-9]/),
   
 })
 
@@ -44,5 +48,10 @@ export type LoginUserState = {
   error: string | null
   success: boolean
 }
+
+
+
+
+
 
 

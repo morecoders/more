@@ -2,7 +2,6 @@
 
 import { useState } from 'react';
 import Link from 'next/link';
-import { SignedIn, SignedOut, UserButton } from '@clerk/nextjs';
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
@@ -26,21 +25,6 @@ export default function Navbar() {
             <Link href="/contact" className="text-gray-700 hover:text-blue-600">
               Contact
             </Link>
-
-            {/* Show only when signed in */}
-            <SignedIn>
-              <Link href="/profile" className="text-gray-700 hover:text-blue-600">
-                Dashboard
-              </Link>
-              <UserButton afterSignOutUrl="/" />
-            </SignedIn>
-
-            {/* Optional: show Sign In button if signed out */}
-            <SignedOut>
-              <Link href="/auth/sign-in/" className="text-gray-700 hover:text-blue-600">
-                Sign In
-              </Link>
-            </SignedOut>
           </div>
 
           {/* Mobile menu button */}
@@ -87,24 +71,17 @@ export default function Navbar() {
           <Link href="/about" className="block text-gray-700 hover:text-blue-600">
             About
           </Link>
-          <Link href="/contact" className="block text-gray-700 hover:text-blue-600">
-            Contact
-          </Link>
+            <Link href="/contact" className="block text-gray-700 hover:text-blue-600">
+              Contact
+            </Link>
 
-          <SignedIn>
             <Link href="/profile" className="block text-gray-700 hover:text-blue-600">
               Dashboard
             </Link>
-            <div className="pt-2">
-              <UserButton afterSignOutUrl="/" />
-            </div>
-          </SignedIn>
-
-          <SignedOut>
+               
             <Link href="/auth/sign-in/" className="block text-gray-700 hover:text-blue-600">
               Sign In
-            </Link>
-          </SignedOut>
+            </Link>  
         </div>
       )}
     </nav>

@@ -1,30 +1,26 @@
 
 import Profile from "@/components/res/profile"
-import { LoggedInUser } from "@/types/types"
-import { get_cookies } from "@/utils/cookies"
+import { auth } from "@/lib/auth";
+import { headers } from "next/headers";
 
-import { auth, currentUser } from "@clerk/nextjs/server"
-import { redirect } from "next/navigation"
 
 const UserBoard = async () => {
-  const data = await auth()
-  //const user =(await get_cookies('user')) as LoggedInUser
-  if (!data.isAuthenticated) redirect('/auth/sign-in/')
-  const user = await currentUser()
 
+  const session = await auth.api.getSession({headers: await headers()})
+  const email = session?.user.email
+  const opt = session?.user.name.split(" ")
+  
+  const profile = session?.user.image ?? '/profile.svg'
   return (
     <>
       <Profile
-        first_name={`${user?.firstName}`}
-        last_name={`${user?.lastName}`}
-        username={`${user?.emailAddresses[0].emailAddress}`}
-        img={user?.imageUrl}
-        age={user?.publicMetadata.age ? String(user.publicMetadata.age) : 'N/A'}
-
+        first_name={`${opt?.[0]}`}
+        last_name={`${opt?.[1]}`}
+        username={`${email}`}
+        img={profile}  //Todo
       />
-
     </>
-  )
+  );
 }
 
 

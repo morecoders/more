@@ -20,7 +20,7 @@ export default function Home() {
             <Link href="/profile" className="bg-blue-600 text-white px-6 py-3 rounded-md hover:bg-blue-700">
               View Dashboard
             </Link>
-            <Link href="/auth/sign-up/" className="text-blue-600 px-6 py-3 border border-blue-600 rounded-md hover:bg-blue-50">
+            <Link href="/v1/signup/" className="text-blue-600 px-6 py-3 border border-blue-600 rounded-md hover:bg-blue-50">
                Create Portfolio
             </Link>
           </div>

@@ -10,18 +10,18 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "@clerk/nextjs": "^6.25.5",
-    "axios": "^1.10.0",
-    "better-auth": "^1.3.3",
+    "@prisma/client": "^6.12.0",
+    "better-auth": "^1.3.4",
     "json-server": "^1.0.0-beta.3",
     "next": "15.3.5",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
+    "sonner": "^2.0.6",
     "zod": "^4.0.5"
   },
   "devDependencies": {
-    "@prisma/client": "^6.12.0",
     "@tailwindcss/postcss": "^4",
+    "@types/better-sqlite3": "^7.6.13",
     "@types/node": "^20",
     "@types/react": "^19",
     "@types/react-dom": "^19",
