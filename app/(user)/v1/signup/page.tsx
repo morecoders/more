@@ -17,7 +17,7 @@ export default function Page() {
     },[isPending])
     return (
         <>
-           { isPending ? <Loader label="loading..."/> : <Signup /> }
+           { isPending ? <Loader text="loading..."/> : <Signup /> }
         </>
     )
 }

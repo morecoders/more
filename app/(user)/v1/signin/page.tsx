@@ -18,7 +18,7 @@ export default function Page() {
         <>
           { 
             isPending ?
-            <Loader label="Loadding" /> :
+            <Loader text="Loadding" /> :
             <LoginForm />
           }
         </>

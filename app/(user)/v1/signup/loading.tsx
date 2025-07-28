@@ -4,6 +4,6 @@ import Loader from "@/components/ui/loading";
 
 export default async function Loading() {
   return (
-    <Loader label="Loading sign up page..."/>
+    <Loader text="Loading sign up page..."/>
   );
 }
